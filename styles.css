@@ -1,0 +1,400 @@
+/* ==========================================================================
+   ANDREW G. MANANGAN — PORTFOLIO STYLES
+   Inspired by anascode.space aesthetic:
+   Space Grotesk + Instrument Serif + Caveat handwritten doodles + Modern dark minimalism
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-doodle: 'Caveat', cursive;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Dark Theme Tokens (Default) */
+  --bg-primary: #09090b;
+  --bg-secondary: #121215;
+  --bg-card: #18181b;
+  --bg-card-hover: #222227;
+  --bg-accent: #27272a;
+  --bg-accent-subtle: rgba(255, 255, 255, 0.04);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-dashed-color: rgba(255, 255, 255, 0.12);
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-glow: #38bdf8;
+  --accent-badge: #0284c7;
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --grid-dot: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-accent: #e4e4e7;
+  --bg-accent-subtle: rgba(0, 0, 0, 0.03);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-dashed-color: rgba(0, 0, 0, 0.12);
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --accent-glow: #0284c7;
+  --accent-badge: #0369a1;
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --grid-dot: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}
+
+/* Blueprint Grid Background Pattern */
+.blueprint-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.blueprint-dots {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Top & Bottom progressive blur masks */
+.progressive-blur-top {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  z-index: 40;
+  background: linear-gradient(to bottom, var(--bg-primary) 20%, transparent 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.progressive-blur-bottom {
+  pointer-events: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  z-index: 40;
+  background: linear-gradient(to top, var(--bg-primary) 20%, transparent 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+}
+
+/* Squircle and Corner Styling */
+.corner-squircle {
+  border-radius: 28px;
+}
+
+.squircle-pill {
+  border-radius: 9999px;
+}
+
+/* Typography Helpers */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-doodle {
+  font-family: var(--font-doodle);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Dashed borders matching anascode.space */
+.border-dashed-custom {
+  border-style: dashed;
+  border-color: var(--border-dashed-color);
+}
+
+.border-subtle {
+  border: 1px solid var(--border-color);
+}
+
+/* Navigation Pill */
+.nav-capsule {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(18, 18, 21, 0.75);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .nav-capsule {
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+}
+
+/* Mechanical Scrollbar */
+.mechanical-track {
+  width: 32px;
+  height: 280px;
+  border-radius: 9999px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+}
+
+.mechanical-ticks {
+  position: absolute;
+  inset: 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.mechanical-tick {
+  width: 8px;
+  height: 1px;
+  margin: 0 auto;
+  background-color: var(--text-secondary);
+}
+
+.mechanical-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 48px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  cursor: grab;
+  transition: transform 0.05s ease, height 0.2s ease;
+}
+
+.mechanical-thumb:active {
+  cursor: grabbing;
+  height: 54px;
+}
+
+/* Doodle Annotations */
+.doodle-tag {
+  color: var(--text-muted);
+  user-select: none;
+  pointer-events: none;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Pulse indicator */
+.pulse-beacon {
+  position: relative;
+}
+
+.pulse-beacon::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  opacity: 0.75;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Interactive Card Styles */
+.portfolio-card {
+  background-color: transparent;
+  border-radius: 24px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card:hover {
+  background-color: var(--bg-accent-subtle);
+  transform: translateY(-2px);
+}
+
+/* Stack Tag Badge */
+.stack-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 18px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.stack-badge:hover {
+  color: var(--text-primary);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-2px);
+  background-color: var(--bg-card);
+}
+
+.stack-badge img {
+  filter: grayscale(80%) opacity(0.7);
+  transition: all 0.25s ease;
+}
+
+.stack-badge:hover img {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+/* Command Palette Modal */
+.cmd-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.cmd-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cmd-modal {
+  transform: translateY(-10px) scale(0.98);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cmd-backdrop.open .cmd-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Toast Notification */
+#toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* GitHub Heatmap Grid Simulation */
+.github-grid {
+  display: grid;
+  grid-template-columns: repeat(28, 1fr);
+  gap: 3px;
+}
+
+.github-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  transition: transform 0.15s ease;
+}
+
+.github-cell:hover {
+  transform: scale(1.3);
+  z-index: 5;
+}
+
+.gh-0 { background-color: rgba(255, 255, 255, 0.05); }
+.gh-1 { background-color: #0e4429; }
+.gh-2 { background-color: #006d32; }
+.gh-3 { background-color: #26a641; }
+.gh-4 { background-color: #39d353; }
+
+[data-theme="light"] .gh-0 { background-color: rgba(0, 0, 0, 0.06); }
+[data-theme="light"] .gh-1 { background-color: #9be9a8; }
+[data-theme="light"] .gh-2 { background-color: #40c463; }
+[data-theme="light"] .gh-3 { background-color: #30a14e; }
+[data-theme="light"] .gh-4 { background-color: #216e39; }
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

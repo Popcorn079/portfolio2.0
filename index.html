@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andrew G. Manangan — Back End Developer &amp; Systems Hardware</title>
+  <meta name="description" content="Manangan, Andrew G. — Back End Developer, AI automation specialist, and aspiring game developer. Computer Engineering undergraduate at ICCT Colleges (with background at EARIST)." />
+  <meta name="author" content="Andrew G. Manangan" />
+  <meta name="keywords" content="Andrew Manangan, Back End Developer, AI Automation, Game Development, Computer Engineering, ICCT Colleges, EARIST, C++, Python, SQL, Hardware Diagnostics" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Andrew G. Manangan — Back End Developer &amp; Systems Hardware" />
+  <meta property="og:description" content="Computer Engineering undergraduate bridging the gap between software development and hands-on systems hardware." />
+  <meta property="og:url" content="https://github.com/Popcorn079" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Space Grotesk, Instrument Serif, Caveat, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Original Bundled CSS from anascode.space -->
+  <link rel="stylesheet" href="original.css" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Font Bindings: Original Theme */
+    :root {
+      --font-space-grotesk: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-instrument-serif: 'Instrument Serif', Georgia, serif;
+      --font-caveat: 'Caveat', cursive;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-space-grotesk);
+      overflow-x: hidden;
+    }
+
+    .font-serif, [class*="instrument_serif"] {
+      font-family: var(--font-instrument-serif) !important;
+    }
+
+    .font-doodle, [class*="caveat"] {
+      font-family: var(--font-caveat) !important;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono) !important;
+    }
+
+    /* Header Entrance */
+    @keyframes header-enter {
+      0% {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.96);
+        filter: blur(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+      }
+    }
+    header {
+      animation: header-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Scroll Reveal & Micro-interactions */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-item.revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* Stagger Delays */
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    /* Doodle Arrow Hand-drawn Ink Animation */
+    .doodle-arrow path {
+      stroke-dasharray: 250;
+      stroke-dashoffset: 250;
+      transition: stroke-dashoffset 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .doodle-arrow.drawn path {
+      stroke-dashoffset: 0;
+    }
+    .doodle-container {
+      opacity: 0;
+      transform: translateY(12px) rotate(var(--doodle-rot, 0deg));
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .doodle-container.revealed {
+      opacity: 1;
+      transform: translateY(0) rotate(var(--doodle-rot, 0deg));
+    }
+    @keyframes doodle-wobble {
+      0%, 100% {
+        transform: translateY(0px) rotate(var(--doodle-rot, 0deg));
+      }
+      50% {
+        transform: translateY(-5px) rotate(calc(var(--doodle-rot, 0deg) + 1.5deg));
+      }
+    }
+    .doodle-container.active-float {
+      animation: doodle-wobble 4.5s ease-in-out infinite;
+    }
+
+    /* =========================================================
+       Ambient Morse Code Video Background (Pinterest Pin 482940760054728458)
+       ========================================================= */
+    #ambient-morse-bg {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      pointer-events: none !important;
+      z-index: 0 !important;
+      overflow: hidden !important;
+      user-select: none !important;
+    }
+
+    #ambient-morse-bg video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+      pointer-events: none !important;
+    }
+
+    .dark #ambient-morse-bg video {
+      opacity: 0.18 !important;
+      mix-blend-mode: screen !important;
+    }
+
+    html:not(.dark) #ambient-morse-bg video {
+      opacity: 0.08 !important;
+      filter: invert(1) !important;
+      mix-blend-mode: multiply !important;
+    }
+
+    /* =========================================================
+       Footer Banner Video Styling
+       ========================================================= */
+    .footer-banner-container {
+      width: 100% !important;
+      height: 240px !important;
+      position: relative !important;
+      overflow: hidden !important;
+      border-radius: 24px !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.3) !important;
+      background-color: var(--secondary) !important;
+    }
+
+    html:not(.dark) .footer-banner-container {
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .footer-banner-container video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    @media (max-width: 640px) {
+      .footer-banner-container {
+        height: 160px !important;
+        border-radius: 18px !important;
+      }
+    }
+
+    /* =========================================================
+       Certificates & Seminars Card Layout & Spacing Fix
+       ========================================================= */
+    .cert-card-layout {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      gap: 20px !important;
+      width: 100% !important;
+    }
+
+    .cert-thumb-box {
+      width: 220px !important;
+      min-width: 220px !important;
+      max-width: 220px !important;
+      height: 145px !important;
+      flex-shrink: 0 !important;
+      border-radius: 16px !important;
+      overflow: hidden !important;
+      position: relative !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      background-color: rgba(0, 0, 0, 0.3) !important;
+      box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    html:not(.dark) .cert-thumb-box {
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      background-color: rgba(0, 0, 0, 0.05) !important;
+      box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .cert-thumb-box img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    .cert-info-box {
+      flex: 1 1 0% !important;
+      min-width: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .cert-title {
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      line-height: 1.35 !important;
+      color: var(--foreground) !important;
+    }
+
+    .cert-meta {
+      margin-top: 4px !important;
+      font-size: 11px !important;
+      font-family: var(--font-mono, monospace) !important;
+      color: var(--muted-foreground) !important;
+      display: flex !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+      gap: 6px !important;
+    }
+
+    .cert-desc {
+      margin-top: 8px !important;
+      font-size: 12.5px !important;
+      line-height: 1.55 !important;
+      color: var(--muted-foreground) !important;
+    }
+
+    .cert-actions {
+      margin-top: 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      flex-wrap: wrap !important;
+    }
+
+    @media (max-width: 640px) {
+      .cert-card-layout {
+        flex-direction: column !important;
+        gap: 14px !important;
+      }
+      .cert-thumb-box {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        height: 180px !important;
+      }
+    }
+
+    /* =========================================================
+       Card Focus Blur & Selection System (Aceternity / Focus Mode)
+       When a card is hovered or selected, non-selected cards blur
+       ========================================================= */
+    .cards-blur-group {
+      position: relative;
+    }
+
+    article.interactive-card,
+    .ai-tool-card {
+      transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background-color 0.25s ease, 
+                  border-color 0.25s ease,
+                  box-shadow 0.25s ease !important;
+      will-change: filter, opacity, transform;
+    }
+
+    /* 1. Live Hover Focus: when hovering a card in an unselected group, blur siblings */
+    .cards-blur-group:not(.has-selected):has(.interactive-card:hover) .interactive-card:not(:hover),
+    .cards-blur-group:not(.has-selected):has(.ai-tool-card:hover) .ai-tool-card:not(:hover) {
+      filter: blur(3.5px) !important;
+      opacity: 0.38 !important;
+      transform: scale(0.985) !important;
+    }
+
+    /* The hovered card stays sharp & lifted */
+    .cards-blur-group:not(.has-selected) .interactive-card:hover,
+    .cards-blur-group:not(.has-selected) .ai-tool-card:hover {
+      filter: blur(0px) !important;
+      opacity: 1 !important;
+      transform: translateY(-2px) scale(1.012) !important;
+      background-color: var(--accent) !important;
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.25) !important;
+      z-index: 10 !important;
+    }
+
+    /* 2. Locked Selection State: when a card is selected (clicked) */
+    .cards-blur-group.has-selected .interactive-card:not(.card-selected),
+    .cards-blur-group.has-selected .ai-tool-card:not(.card-selected) {
+      filter: blur(4px) !important;
+      opacity: 0.35 !important;
+      transform: scale(0.98) !important;
+    }
+
+    /* Hover preview on a blurred sibling while another is selected */
+    .cards-blur-group.has-selected .interactive-card:not(.card-selected):hover,
+    .cards-blur-group.has-selected .ai-tool-card:not(.card-selected):hover {
+      filter: blur(0px) !important;
+      opacity: 0.85 !important;
+      transform: scale(1) !important;
+    }
+
+    /* The active / selected card */
+    article.interactive-card.card-selected,
+    .ai-tool-card.card-selected {
+      filter: blur(0px) !important;
+      opacity: 1 !important;
+      transform: translateY(-3px) scale(1.015) !important;
+      background-color: var(--accent) !important;
+      z-index: 20 !important;
+    }
+
+    .dark article.interactive-card.card-selected,
+    .dark .ai-tool-card.card-selected {
+      box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.5), 0 0 0 1.5px rgba(255, 255, 255, 0.2) !important;
+    }
+
+    html:not(.dark) article.interactive-card.card-selected,
+    html:not(.dark) .ai-tool-card.card-selected {
+      box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.15), 0 0 0 1.5px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    article.interactive-card.card-selected .card-icon-container,
+    .ai-tool-card.card-selected .card-icon-container,
+    .ai-tool-card.card-selected .ai-icon-box {
+      transform: scale(1.08) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    article.interactive-card.card-selected .card-arrow,
+    .ai-tool-card.card-selected .card-arrow {
+      transform: translate(2px, -2px) !important;
+      color: var(--foreground) !important;
+    }
+
+    article.interactive-card:hover .card-icon-container,
+    .ai-tool-card:hover .card-icon-container {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    article.interactive-card:hover .card-arrow,
+    .ai-tool-card:hover .card-arrow {
+      transform: translate(2px, -2px);
+      color: var(--foreground) !important;
+    }
+
+    .card-icon-container {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important;
+    }
+
+    /* AI Developer Tools Grid & Typography Styling */
+    .ai-header-title {
+      font-family: var(--font-space-grotesk) !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.025em !important;
+      line-height: 1.3 !important;
+    }
+    .ai-badge-pill {
+      font-family: var(--font-mono, monospace) !important;
+      font-size: 11px !important;
+      padding: 3px 12px !important;
+      border-radius: 9999px !important;
+      border: 1px solid rgba(236, 72, 153, 0.35) !important;
+      color: #f472b6 !important;
+      background-color: rgba(131, 24, 67, 0.25) !important;
+      white-space: nowrap !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    }
+    html:not(.dark) .ai-badge-pill {
+      border-color: rgba(236, 72, 153, 0.4) !important;
+      color: #db2777 !important;
+      background-color: rgba(253, 242, 248, 0.95) !important;
+    }
+
+    .ai-grid-container {
+      display: grid !important;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+      gap: 12px !important;
+      width: 100% !important;
+    }
+    @media (max-width: 680px) {
+      .ai-grid-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+      .ai-grid-container > :last-child:nth-child(odd) {
+        grid-column: span 2 !important;
+      }
+    }
+
+    .ai-tool-card {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      padding: 18px 10px 16px !important;
+      border-radius: 18px !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background-color: rgba(255, 255, 255, 0.02) !important;
+      cursor: pointer !important;
+      position: relative !important;
+      user-select: none !important;
+    }
+    html:not(.dark) .ai-tool-card {
+      border-color: rgba(0, 0, 0, 0.08) !important;
+      background-color: rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .ai-icon-box {
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin-bottom: 12px !important;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+    }
+    .ai-tool-card:hover .ai-icon-box {
+      transform: scale(1.1) !important;
+    }
+
+    .ai-box-openai {
+      background-color: #072b22 !important;
+      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      color: #34d399 !important;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15) !important;
+    }
+    html:not(.dark) .ai-box-openai {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #059669 !important;
+    }
+
+    .ai-box-gemini {
+      background-color: #101a36 !important;
+      border: 1px solid rgba(59, 130, 246, 0.45) !important;
+      color: #60a5fa !important;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.15) !important;
+    }
+    html:not(.dark) .ai-box-gemini {
+      background-color: #eff6ff !important;
+      border-color: #bfdbfe !important;
+      color: #2563eb !important;
+    }
+
+    .ai-box-antigravity {
+      background-color: #08282c !important;
+      border: 1px solid rgba(6, 182, 212, 0.45) !important;
+      color: #22d3ee !important;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.15) !important;
+    }
+    html:not(.dark) .ai-box-antigravity {
+      background-color: #ecfeff !important;
+      border-color: #a5f3fc !important;
+      color: #0891b2 !important;
+    }
+
+    .ai-box-claude {
+      background-color: #281608 !important;
+      border: 1px solid rgba(245, 158, 11, 0.45) !important;
+      color: #fbbf24 !important;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15) !important;
+    }
+    html:not(.dark) .ai-box-claude {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+      color: #d97706 !important;
+    }
+
+    .ai-box-copilot {
+      background-color: #20102e !important;
+      border: 1px solid rgba(168, 85, 247, 0.45) !important;
+      color: #c084fc !important;
+      box-shadow: 0 4px 14px rgba(168, 85, 247, 0.15) !important;
+    }
+    html:not(.dark) .ai-box-copilot {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #9333ea !important;
+    }
+
+    .ai-card-title {
+      font-family: var(--font-space-grotesk) !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.015em !important;
+      line-height: 1.25 !important;
+      color: var(--foreground) !important;
+    }
+    .ai-card-subtitle {
+      font-size: 11px !important;
+      color: var(--muted-foreground, #888888) !important;
+      margin-top: 3px !important;
+      white-space: nowrap !important;
+    }
+    .card-arrow {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    }
+
+    /* Grid & Layout Lines Hidden (Borderless Clean Look Matching anascode.space) */
+    .border-dashed,
+    [class*="border-dashed"],
+    .divide-dashed > *,
+    .divide-dashed > :not([hidden]) ~ :not([hidden]),
+    [class*="divide-dashed"] > *,
+    [class*="divide-dashed"] > :not([hidden]) ~ :not([hidden]),
+    .nav-list > li + li,
+    .nav-divider-theme {
+      border-color: transparent !important;
+    }
+
+    /* When grid-mode is active, show crisp dashed lines */
+    body.show-blueprint-grid .border-dashed,
+    body.show-blueprint-grid [class*="border-dashed"],
+    body.show-blueprint-grid .divide-dashed > *,
+    body.show-blueprint-grid .divide-dashed > :not([hidden]) ~ :not([hidden]),
+    body.show-blueprint-grid [class*="divide-dashed"] > *,
+    body.show-blueprint-grid [class*="divide-dashed"] > :not([hidden]) ~ :not([hidden]) {
+      border-color: var(--border) !important;
+    }
+
+    /* =========================================================
+       Custom macOS / Figma Aesthetic Mouse Cursor
+       ========================================================= */
+    :root {
+      --cursor-default: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M4.5%202.5L4.5%2019.8L9%2015.3L12%2021.8L14.5%2020.3L11.5%2013.8L17.5%2013.8L4.5%202.5Z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23000000%22%20stroke-width%3D%221.4%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E") 4 2, auto;
+      --cursor-pointer: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M8.5%202.5C7.7%202.5%207%203.2%207%204V11.5L5.7%2010.3C5.1%209.7%204.2%209.7%203.6%2010.3C3%2010.9%203%2011.8%203.6%2012.4L8.2%2017C9.3%2018.1%2010.8%2018.8%2012.3%2018.8H15.5C18.3%2018.8%2020.5%2016.6%2020.5%2013.8V9.5C20.5%208.7%2019.8%208%2019%208C18.6%208%2018.2%208.2%2017.9%208.5C17.6%207.6%2016.7%207%2015.8%207C15.4%207%2015%207.1%2014.7%207.4C14.4%206.6%2013.6%206%2012.6%206C12.3%206%2012%206.1%2011.7%206.2V4C11.7%203.2%2011%202.5%2010.2%202.5H8.5Z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23000000%22%20stroke-width%3D%221.4%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") 8 2, pointer;
+    }
+
+    html, body, *, *::before, *::after {
+      cursor: var(--cursor-default) !important;
+    }
+
+    a, button, [role="button"], .cursor-pointer, .interactive-card, .btn-cert-preview, .cmd-row, summary, label[for], #theme-toggle, #sound-toggle, #profile-audio-pill, #cmd-btn, #contact-send-btn, .email-trigger, [tabindex="0"] {
+      cursor: var(--cursor-pointer) !important;
+    }
+
+    input[type="text"], input[type="email"], textarea, [contenteditable="true"] {
+      cursor: text !important;
+    }
+
+    .cursor-grab, #mechanical-track, #mechanical-thumb {
+      cursor: grab !important;
+    }
+
+    .cursor-grabbing, #mechanical-thumb:active {
+      cursor: grabbing !important;
+    }
+
+    #custom-cursor {
+      display: none !important;
+    }
+
+    /* Mechanical scrollbar thumb transition */
+    #mechanical-thumb {
+      will-change: transform;
+      transition: transform 0.05s linear;
+    }
+
+    /* Active section indicator */
+    .nav-link.active .nav-indicator {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .nav-link.active .nav-text {
+      color: var(--foreground) !important;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       GitHub Activity Matrix & Horizontal Scrollbar (Image 2 Match)
+       ========================================================= */
+    .github-grid-wrapper {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      padding: 12px 14px !important;
+      border-radius: 12px !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      background-color: #17181c !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35) !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.06) !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    html:not(.dark) .github-grid-wrapper {
+      background-color: #f6f8fa !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+      scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Dedicated visible horizontal scrollbar matching Image 2 */
+    .github-grid-wrapper::-webkit-scrollbar {
+      height: 9px !important;
+      display: block !important;
+    }
+    .github-grid-wrapper::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.07) !important;
+      border-radius: 4px !important;
+      margin: 0 4px !important;
+    }
+    .github-grid-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3) !important;
+      border-radius: 4px !important;
+    }
+    .github-grid-wrapper::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5) !important;
+    }
+    html:not(.dark) .github-grid-wrapper::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.06) !important;
+    }
+    html:not(.dark) .github-grid-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.25) !important;
+    }
+    html:not(.dark) .github-grid-wrapper::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.45) !important;
+    }
+
+    .github-grid-cells {
+      display: grid !important;
+      grid-template-rows: repeat(7, 10px) !important;
+      grid-auto-flow: column !important;
+      grid-auto-columns: 10px !important;
+      gap: 3px !important;
+      width: max-content !important;
+      min-width: max-content !important;
+      padding-bottom: 2px !important;
+    }
+
+    /* Individual GitHub day tiles */
+    .gh-cell {
+      display: block !important;
+      width: 10px !important;
+      height: 10px !important;
+      min-width: 10px !important;
+      min-height: 10px !important;
+      border-radius: 2px !important;
+      box-sizing: border-box !important;
+      transition: transform 0.15s ease, filter 0.15s ease !important;
+      cursor: var(--cursor-pointer, pointer) !important;
+    }
+    .gh-cell:hover {
+      transform: scale(1.4) !important;
+      z-index: 20 !important;
+      position: relative !important;
+      filter: brightness(1.25) !important;
+    }
+
+    /* Dark Mode Activity Tile Colors */
+    .gh-cell.gh-lvl-0 {
+      background-color: #2b2e35 !important;
+    }
+    .gh-cell.gh-lvl-1 {
+      background-color: #0e4429 !important;
+    }
+    .gh-cell.gh-lvl-2 {
+      background-color: #006d32 !important;
+    }
+    .gh-cell.gh-lvl-3 {
+      background-color: #26a641 !important;
+    }
+    .gh-cell.gh-lvl-4 {
+      background-color: #39d353 !important;
+    }
+
+    /* Light Mode Activity Tile Colors */
+    html:not(.dark) .gh-cell.gh-lvl-0 {
+      background-color: #ebedf0 !important;
+    }
+    html:not(.dark) .gh-cell.gh-lvl-1 {
+      background-color: #9be9a8 !important;
+    }
+    html:not(.dark) .gh-cell.gh-lvl-2 {
+      background-color: #40c463 !important;
+    }
+    html:not(.dark) .gh-cell.gh-lvl-3 {
+      background-color: #30a14e !important;
+    }
+    html:not(.dark) .gh-cell.gh-lvl-4 {
+      background-color: #216e39 !important;
+    }
+
+    /* Legend Indicator Squares */
+    .gh-legend-cell {
+      display: inline-block !important;
+      width: 10px !important;
+      height: 10px !important;
+      min-width: 10px !important;
+      min-height: 10px !important;
+      border-radius: 2px !important;
+      box-sizing: border-box !important;
+      flex-shrink: 0 !important;
+    }
+    .gh-legend-cell.gh-lvl-0 {
+      background-color: #2b2e35 !important;
+    }
+    .gh-legend-cell.gh-lvl-1 {
+      background-color: #0e4429 !important;
+    }
+    .gh-legend-cell.gh-lvl-2 {
+      background-color: #006d32 !important;
+    }
+    .gh-legend-cell.gh-lvl-3 {
+      background-color: #26a641 !important;
+    }
+    .gh-legend-cell.gh-lvl-4 {
+      background-color: #39d353 !important;
+    }
+    html:not(.dark) .gh-legend-cell.gh-lvl-0 {
+      background-color: #ebedf0 !important;
+    }
+    html:not(.dark) .gh-legend-cell.gh-lvl-1 {
+      background-color: #9be9a8 !important;
+    }
+    html:not(.dark) .gh-legend-cell.gh-lvl-2 {
+      background-color: #40c463 !important;
+    }
+    html:not(.dark) .gh-legend-cell.gh-lvl-3 {
+      background-color: #30a14e !important;
+    }
+    html:not(.dark) .gh-legend-cell.gh-lvl-4 {
+      background-color: #216e39 !important;
+    }
+
+    /* Custom Scrollbar for inner elements */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+  
+    /* Audio Wave Bars Pulse Animation & Sound Pill */
+    .audio-wave-bars {
+      display: flex !important;
+      align-items: center !important;
+      gap: 2.5px !important;
+      height: 14px !important;
+      padding: 0 1px !important;
+    }
+    .audio-bar {
+      display: inline-block !important;
+      width: 2.5px !important;
+      min-width: 2.5px !important;
+      max-width: 2.5px !important;
+      background-color: var(--muted-foreground) !important;
+      border-radius: 9999px !important;
+      transition: height 0.2s ease, opacity 0.2s ease, background-color 0.2s ease !important;
+    }
+    .group\/audio:hover .audio-bar {
+      background-color: var(--foreground) !important;
+    }
+    .audio-bar:nth-child(1) { height: 5px !important; }
+    .audio-bar:nth-child(2) { height: 12px !important; }
+    .audio-bar:nth-child(3) { height: 8px !important; }
+    .audio-bar:nth-child(4) { height: 10px !important; }
+
+    @keyframes audioWave {
+      0%, 100% { height: 4px; }
+      50% { height: 13px; }
+    }
+    .audio-playing .audio-bar:nth-child(1) { animation: audioWave 0.75s ease-in-out infinite 0.1s !important; }
+    .audio-playing .audio-bar:nth-child(2) { animation: audioWave 0.75s ease-in-out infinite 0.35s !important; }
+    .audio-playing .audio-bar:nth-child(3) { animation: audioWave 0.75s ease-in-out infinite 0.2s !important; }
+    .audio-playing .audio-bar:nth-child(4) { animation: audioWave 0.75s ease-in-out infinite 0.45s !important; }
+
+    #profile-audio-pill:not(.audio-playing) .audio-bar {
+      height: 3px !important;
+      opacity: 0.4 !important;
+      animation: none !important;
+    }
+
+    /* Grid switch active styling */
+    #grid-switch-btn.active {
+      background-color: var(--foreground) !important;
+    }
+    #grid-switch-btn.active #grid-switch-knob {
+      transform: translateX(14px) !important;
+      background-color: var(--background) !important;
+    }
+
+  
+    /* Card Icon Containers (Experience, Education, Projects) */
+    .card-icon-container {
+      width: 58px !important;
+      height: 58px !important;
+      min-width: 58px !important;
+      min-height: 58px !important;
+      max-width: 58px !important;
+      max-height: 58px !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      margin-top: 2px !important;
+    }
+
+    .card-icon-container img {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+      border-radius: 14px !important;
+      padding: 4px !important;
+    }
+
+    .card-icon-container svg {
+      width: 28px !important;
+      height: 28px !important;
+      flex-shrink: 0 !important;
+    }
+
+  </style>
+</head>
+<body class="antialiased relative min-h-screen bg-background text-foreground transition-colors duration-300">
+
+  <!-- Ambient Morse Code Animated Background (Pinterest Pin 482940760054728458 / bg-identidade.mp4) -->
+  <div id="ambient-morse-bg" aria-hidden="true">
+    <video autoplay loop muted playsinline poster="bg-identidade.jpg">
+      <source src="bg-identidade.mp4" type="video/mp4" />
+      <img alt="Morse code background" src="bg-identidade.jpg" />
+    </video>
+    <!-- Vignette gradients to preserve text legibility -->
+    <div class="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background/90 pointer-events-none"></div>
+    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+  </div>
+
+  <!-- Progressive Edge Blurs (Top & Bottom) -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-x-0 z-40 -top-2 h-24">
+    <div class="absolute inset-0" style="backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);mask-image:linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);-webkit-mask-image:linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)"></div>
+    <div class="absolute inset-0 opacity-70" style="background:linear-gradient(to bottom, var(--background) 0%, transparent 100%)"></div>
+  </div>
+  <div aria-hidden="true" class="pointer-events-none fixed inset-x-0 z-40 -bottom-2 h-28">
+    <div class="absolute inset-0" style="backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);-webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)"></div>
+    <div class="absolute inset-0 opacity-70" style="background:linear-gradient(to top, var(--background) 0%, transparent 100%)"></div>
+  </div>
+
+  <!-- Mechanical Scrollbar Floating on Right Edge (anascode.space exact replica) -->
+  <div class="fixed right-1 top-1/2 z-50 -translate-y-1/2 sm:right-3 md:right-8">
+    <div class="flex items-center gap-5">
+      <div id="mechanical-track" style="height:280px" class="group relative flex w-8 cursor-pointer justify-center" title="Click or drag to scroll">
+        <div class="absolute inset-y-0 rounded-full border border-border/60 bg-muted/40 backdrop-blur-sm group-hover:bg-muted/60 transition-colors"></div>
+        <div class="pointer-events-none absolute inset-y-0 flex flex-col justify-between py-3 opacity-25">
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+          <span class="mx-auto h-px w-2 bg-muted-foreground"></span>
+        </div>
+        <div id="mechanical-thumb" class="absolute left-1/2 top-0 z-10 flex h-12 w-8 -translate-x-1/2 cursor-grab items-center justify-center touch-none active:cursor-grabbing">
+          <div class="absolute overflow-hidden rounded-full border border-primary-foreground/20 bg-primary shadow-lg" style="height:48px;width:9px">
+            <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-[3px] opacity-40">
+              <span class="h-px w-1/2 bg-primary-foreground"></span>
+              <span class="h-px w-1/2 bg-primary-foreground"></span>
+              <span class="h-px w-1/2 bg-primary-foreground"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-smooth max-w-2xl mx-auto w-full px-4 relative z-10">
+    <main class="flex flex-col">
+
+      <!-- Header Floating Capsule Navigation Bar -->
+      <header class="sticky top-4 sm:top-5 z-50 w-fit max-w-[calc(100vw-2rem)] mx-auto flex justify-center bg-card corner-squircle rounded-4xl border p-1 transition-all duration-300 border-solid border-border/60 shadow-lg backdrop-blur-xl">
+        <nav class="flex items-center justify-between w-full rounded-[80px] corner-squircle border bg-background/90 px-2 py-1.5 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 border-border/40">
+          <ul class="nav-list flex items-center overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden divide-x divide-dashed transition-colors duration-300 divide-transparent">
+            
+            <li class="shrink-0">
+              <a href="#hero" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="hero">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-foreground">About</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#experience" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="experience">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">Experience</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#education" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="education">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">Education</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#projects" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="projects">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">Projects</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#certificates" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="certificates">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">Certificates</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#github" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="github">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">GitHub</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#stack" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="stack">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">Stack</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+            <li class="shrink-0">
+              <a href="#ai-tools" class="nav-link group relative flex h-8 items-center px-3 sm:px-3.5 text-[11px] sm:text-[12px] font-medium tracking-wide transition-colors duration-200" data-section="ai-tools">
+                <span class="absolute inset-0 corner-squircle rounded-[70px] bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"></span>
+                <span class="nav-text relative z-10 transition-colors duration-200 text-muted-foreground group-hover:text-foreground">AI Tools</span>
+                <span class="nav-indicator absolute bottom-[2px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-foreground opacity-0 scale-0 transition-all duration-200"></span>
+              </a>
+            </li>
+
+          </ul>
+
+          <!-- Theme Toggle Switch -->
+          <div class="nav-divider-theme shrink-0 ml-1.5 pl-1.5 border-l border-dashed transition-colors duration-300 border-border/40">
+            <button id="theme-toggle" type="button" title="Toggle dark/light theme" class="flex size-8 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-accent/80 transition-all duration-200">
+              <i id="theme-icon" data-lucide="sun" class="size-4"></i>
+            </button>
+          </div>
+
+        </nav>
+      </header>
+
+      <!-- ================= HERO & ABOUT SECTION ================= -->
+      <section id="hero" class="relative scroll-mt-24">
+        
+        <!-- Doodle: who am I? -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-48 -left-24 -rotate-6" style="--doodle-rot: -6deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">who am I?</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 20 10 Q 40 40, 80 80"></path>
+            <path d="M 55 80 L 80 80 L 70 55"></path>
+          </svg>
+        </div>
+
+        <section class="mx-auto w-full max-w-3xl flex flex-col border border-dashed divide-y border-t-0 divide-dashed transition-colors duration-300 border-border/50 divide-border/50">
+          
+          <!-- Banner Pixel Art Train Night Cityscape -->
+          <div class="reveal-item relative w-full h-40 sm:h-56 md:h-64 overflow-hidden corner-squircle rounded-3xl border border-border/40">
+            <video autoplay loop muted playsinline poster="banner.jpg" class="absolute inset-0 w-full h-full object-cover">
+              <source src="banner.mp4" type="video/mp4" />
+              <img alt="City train pixel art banner" src="banner.jpg" class="w-full h-full object-cover" />
+            </video>
+            <!-- 4-Directional Vignette Fades to blend seamlessly -->
+            <div class="absolute inset-x-0 top-0 h-10 sm:h-14 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
+            
+            <!-- Banner sound indicator pill -->
+            <div class="absolute bottom-3 right-3 z-20">
+              <button id="sound-toggle" type="button" title="Mute sounds" class="group/button inline-flex shrink-0 items-center justify-center rounded-full corner-squircle border bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none border-border bg-background/90 hover:bg-muted hover:text-foreground dark:border-input dark:bg-input/60 dark:hover:bg-input/90 h-8 gap-1.5 px-2.5 backdrop-blur-md shadow-md">
+                <i id="sound-icon" data-lucide="volume-2" class="size-3.5"></i>
+                <span id="sound-label" class="text-xs font-mono">Sound</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Profile Info Row -->
+          <div class="reveal-item delay-1 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 px-2 py-6 sm:px-4">
+            <div class="flex items-start gap-4 sm:gap-5 min-w-0 flex-1">
+              <!-- Avatar with squircle + green status indicator -->
+              <div class="relative w-fit h-fit shrink-0">
+                <div class="size-20 sm:size-24 md:size-28 rounded-[28px] overflow-hidden bg-secondary p-1 border border-border/60 shadow-md flex items-center justify-center" style="border-radius: 28px !important;">
+                  <img alt="Manangan, Andrew G." width="128" height="128" class="w-full h-full object-cover" style="border-radius: 24px !important;" src="profile.jpg" />
+                </div>
+                <span class="absolute bottom-1 right-1 sm:bottom-1.5 sm:right-1.5 size-3.5 rounded-full bg-emerald-500 ring-2 ring-background z-10"></span>
+              </div>
+
+              <!-- Profile Text Info -->
+              <div class="flex flex-col min-w-0 flex-1">
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <h1 class="text-xl sm:text-2xl md:text-3xl font-bold font-serif flex items-center gap-1.5 whitespace-nowrap text-foreground">
+                    <span>Manangan, Andrew G.</span>
+                  </h1>
+                  
+                  <!-- Audio Capsule Player Pill (Refined, animated equalizer, no expand icon) -->
+                  <button id="profile-audio-pill" type="button" class="audio-playing group/audio inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-border/60 bg-secondary/70 hover:bg-accent text-xs font-mono text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-sm select-none" title="Toggle audio feedback">
+                    <i id="pill-audio-icon" data-lucide="volume-2" class="size-3.5 text-muted-foreground group-hover/audio:text-foreground"></i>
+                    <div class="audio-wave-bars">
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                    </div>
+                    <span id="pill-audio-label" class="text-[11px] font-mono tracking-wide">Sound</span>
+                  </button>
+                </div>
+
+                <p class="text-xs sm:text-sm text-foreground font-semibold mt-1">Back End Developer &amp; AI Automation Specialist</p>
+                <p class="text-xs sm:text-sm text-muted-foreground max-w-sm sm:max-w-md mt-1 leading-relaxed">
+                  Computer Engineering undergraduate bridging software and hands-on systems hardware.
+                </p>
+              </div>
+            </div>
+
+            <!-- Header Quick Tools: Blueprint Grid Switch & Command Palette (Sleek Horizontal Pill Bar) -->
+            <div class="flex items-center gap-2.5 shrink-0 self-start sm:self-auto pt-1">
+              <!-- Styled Grid Toggle Switch -->
+              <div class="flex items-center gap-1.5 bg-secondary/50 border border-border/50 px-2.5 py-1 rounded-full">
+                <span id="grid-label" class="text-[10px] font-mono uppercase tracking-wider text-muted-foreground cursor-pointer select-none">Grid</span>
+                <button type="button" id="grid-switch-btn" role="switch" aria-checked="false" aria-labelledby="grid-label" class="relative inline-flex h-[18px] w-[32px] shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-input dark:bg-input/80 transition-colors duration-200 ease-in-out focus:outline-none" title="Toggle architectural blueprint grid">
+                  <span id="grid-switch-knob" class="pointer-events-none inline-block size-3.5 translate-x-0.5 rounded-full bg-background dark:bg-foreground shadow-sm transition-transform duration-200 ease-in-out"></span>
+                </button>
+              </div>
+
+              <!-- Command Palette Trigger Button -->
+              <button id="cmd-btn" type="button" class="inline-flex h-7 items-center justify-center rounded-full border border-border/50 bg-secondary/50 hover:bg-accent text-foreground px-2.5 gap-1.5 transition-all text-[11px] font-mono cursor-pointer shadow-sm" title="Open command palette (Ctrl+K)">
+                <i data-lucide="command" class="size-3 text-muted-foreground"></i>
+                <span>Ctrl+K</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Status Badge Pill -->
+          <div class="reveal-item delay-2 px-2 py-2 sm:px-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>Open to internships &amp; reliable systems</span>
+            </div>
+          </div>
+
+          <!-- Bio Description with Inline Tech Badges -->
+          <div class="reveal-item delay-3 px-2 py-5 sm:px-4 text-[14.5px] leading-relaxed text-muted-foreground space-y-3.5">
+            <p>
+              Hi, I'm <strong class="text-foreground font-semibold">Andrew G. Manangan</strong> and I'm <span class="text-foreground font-medium">21 yr/old</span>, a Back end developer, AI automation, and aspiring game developer. As a Computer Engineering undergraduate at <strong class="text-foreground font-semibold">ICCT Colleges</strong> and Computer Programming at <strong class="text-foreground font-semibold">EARIST</strong>, I bridge the gap between software development and hands-on systems hardware.
+            </p>
+            <p>
+              I spend most of my time around 
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-foreground font-mono text-xs border border-border/60 font-medium">C++</span>, 
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-foreground font-mono text-xs border border-border/60 font-medium">Python</span>, 
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-foreground font-mono text-xs border border-border/60 font-medium">Visual FoxPro</span>, 
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-foreground font-mono text-xs border border-border/60 font-medium">JavaScript</span>, and 
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-secondary text-foreground font-mono text-xs border border-border/60 font-medium">SQL</span> — building console-based academic management systems, automated database utility suites, and clean, responsive web projects.
+            </p>
+            <p>
+              On the hardware &amp; diagnostic side, I perform PC component assembly, hardware troubleshooting, thermal stress testing, and system benchmarking. Always learning, always building, and driven to make complex systems <strong class="text-foreground font-semibold">reliable, clean, and fast</strong>.
+            </p>
+          </div>
+
+          <!-- Quick Action Social Links & Interactive Direct Message Box -->
+          <div class="reveal-item delay-4 p-2 sm:p-4">
+            <form id="contact-form" class="group relative corner-squircle rounded-3xl border border-border/50 bg-secondary/30 p-2 transition-all duration-300 hover:border-border/80 focus-within:border-border focus-within:bg-card/50">
+              
+              <!-- Quick links pill row -->
+              <div class="flex flex-wrap items-center justify-between gap-2 px-2 py-1.5 border-b border-border/30 text-xs font-mono">
+                <div class="flex items-center gap-3">
+                  <a href="https://github.com/Popcorn079" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+                    <i data-lucide="github" class="size-3.5"></i>
+                    <span>GitHub</span>
+                  </a>
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+                    <i data-lucide="facebook" class="size-3.5"></i>
+                    <span>Facebook</span>
+                  </a>
+                  <a href="mailto:andrewmanangan6@gmail.com" class="email-trigger text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+                    <i data-lucide="mail" class="size-3.5"></i>
+                    <span>Email</span>
+                  </a>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button type="button" id="copy-email-btn" class="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Copy email address">
+                    <i data-lucide="copy" class="size-3.5"></i>
+                    <span>Copy Email</span>
+                  </button>
+                  <span class="text-border">|</span>
+                  <a href="Andrew_Manangan_Resume.pdf" download class="flex items-center gap-1 text-foreground font-semibold hover:underline">
+                    <i data-lucide="file-text" class="size-3.5"></i>
+                    <span>CV</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Message input textarea -->
+              <div class="p-2">
+                <textarea id="contact-msg" rows="2" placeholder="An internship, a project, an idea, or just a hello. Say what's on your mind." class="w-full resize-none bg-transparent px-2 pt-1 text-[14.5px] leading-relaxed text-foreground placeholder:text-muted-foreground/60 outline-none"></textarea>
+                <div class="mt-2 flex items-center justify-between border-t border-border/20 pt-2 px-1">
+                  <span id="contact-hint" class="text-[11px] font-medium text-muted-foreground/60 font-mono transition-colors">Press Ctrl + Enter to send</span>
+                  <button id="contact-send-btn" type="submit" aria-label="Send message directly" title="Send message directly" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ease-out bg-foreground text-background hover:opacity-90">
+                    <i data-lucide="arrow-up" class="size-4"></i>
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </section>
+      </section>
+
+      <!-- ================= WORK & FIELD EXPERIENCE SECTION ================= -->
+      <section id="experience" class="relative scroll-mt-24">
+        
+        <!-- Doodle: my journey -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -right-24 rotate-3" style="--doodle-rot: 3deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">my journey</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 80 10 Q 60 40, 20 80"></path>
+            <path d="M 45 80 L 20 80 L 30 55"></path>
+          </svg>
+        </div>
+
+        <section class="w-full flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <h2 class="reveal-item px-2 py-5 sm:px-4 text-lg font-bold tracking-tight text-foreground flex items-center">
+            <span>Work &amp; Field Experience</span>
+          </h2>
+
+          <div class="cards-blur-group flex flex-col divide-y divide-dashed divide-border/50">
+            
+            <!-- Job 1: Brewgasm -->
+            <div class="reveal-item delay-1 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex size-[66px] shrink-0 items-center justify-center overflow-hidden corner-squircle rounded-3xl border border-amber-500/20 bg-amber-500/10 text-amber-400 p-2">
+                    <!-- Brewgasm Specialty Drinks / Barista SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                      <line x1="6" y1="1" x2="6" y2="4"></line>
+                      <line x1="10" y1="1" x2="10" y2="4"></line>
+                      <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <h3 class="flex items-center gap-2 text-[15px] font-semibold leading-5 text-foreground">
+                          <span>Crew</span>
+                          <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                        </h3>
+                        <div class="mt-0.5 text-sm font-medium text-muted-foreground">Brewgasm · Payatas, Quezon City</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Mar 2026 – Aug 2026</span>
+                    </div>
+                    <ul class="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted-foreground list-disc list-inside">
+                      <li>Cleaning the bar, tables, and chairs to maintain high cleanliness standards.</li>
+                      <li>Taking customer orders and handling cash register / cashiering.</li>
+                      <li>Making and serving specialty drinks including coffees, sodas, and refreshments.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Job 2: Shopee Express (SPX) -->
+            <div class="reveal-item delay-2 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex size-[66px] shrink-0 items-center justify-center overflow-hidden corner-squircle rounded-3xl border border-orange-500/20 bg-orange-500/10 text-orange-400 p-2">
+                    <!-- Shopee Express Delivery Truck SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <h3 class="flex items-center gap-2 text-[15px] font-semibold leading-5 text-foreground">
+                          <span>Factory Worker &amp; Logistics Crew</span>
+                          <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                        </h3>
+                        <div class="mt-0.5 text-sm font-medium text-muted-foreground">Shopee Express (SPX) · San Jose Del Monte, Bulacan</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Sep 2025 – Oct 2025</span>
+                    </div>
+                    <ul class="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted-foreground list-disc list-inside">
+                      <li>Arranging high-volume parcels based on geographical location and delivery routes.</li>
+                      <li>Placing parcels securely into sacks and loading onto transport trucks under tight logistics deadlines.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Job 3: Coops Chicken -->
+            <div class="reveal-item delay-3 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex size-[66px] shrink-0 items-center justify-center overflow-hidden corner-squircle rounded-3xl border border-rose-500/20 bg-rose-500/10 text-rose-400 p-2">
+                    <!-- Restaurant / Culinary Cloche SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+                      <path d="M4 11V6a2 2 0 0 1 2-2v0a2 2 0 0 1 2 2v0"></path>
+                      <path d="M12 2v4"></path>
+                      <path d="M4 11h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2z"></path>
+                      <line x1="6" y1="18" x2="18" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <h3 class="flex items-center gap-2 text-[15px] font-semibold leading-5 text-foreground">
+                          <span>Crew</span>
+                          <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                        </h3>
+                        <div class="mt-0.5 text-sm font-medium text-muted-foreground">Coops Chicken · Novaliches, Quezon City</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Aug 2025 – Sep 2025</span>
+                    </div>
+                    <ul class="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted-foreground list-disc list-inside">
+                      <li>Cooking and seasoning chickens depending on customer choice of flavor.</li>
+                      <li>Cleaning kitchen and dining areas, maintaining food safety, and organizing restaurant supplies.</li>
+                      <li>Taking orders, cashiering, and preparing drinks including sodas and juices.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Job 4: Poultry Farm -->
+            <div class="reveal-item delay-4 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex size-[66px] shrink-0 items-center justify-center overflow-hidden corner-squircle rounded-3xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 p-2">
+                    <!-- Farm Agriculture / Harvest Leaf SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 20A7 7 0 0 1 4 13C4 8.5 7.5 5 12 3a9 9 0 0 1 9 9c0 4.5-3.5 8-10 8z"></path>
+                      <path d="M12 3v17"></path>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <h3 class="flex items-center gap-2 text-[15px] font-semibold leading-5 text-foreground">
+                          <span>Crew &amp; Farm Operations</span>
+                          <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                        </h3>
+                        <div class="mt-0.5 text-sm font-medium text-muted-foreground">Poultry Farm · San Jose Del Monte, Bulacan</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Oct 2020 – Nov 2020</span>
+                    </div>
+                    <ul class="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted-foreground list-disc list-inside">
+                      <li>Cleaning and preparing poultry, including detailed organ removal (heart, gizzards).</li>
+                      <li>Counting, organizing, and tracking live and processed inventory.</li>
+                      <li>Regularly cleaning and sanitizing the surrounding operational environment.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= EDUCATION SECTION ================= -->
+      <section id="education" class="relative scroll-mt-24">
+        
+        <!-- Doodle: studies -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -left-24 -rotate-3" style="--doodle-rot: -3deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">studies</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 20 10 Q 40 40, 80 80"></path>
+            <path d="M 55 80 L 80 80 L 70 55"></path>
+          </svg>
+        </div>
+
+        <section class="w-full flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <h2 class="reveal-item px-2 py-5 sm:px-4 text-lg font-bold tracking-tight text-foreground flex items-center">
+            <span>Education</span>
+          </h2>
+
+          <div class="cards-blur-group flex flex-col divide-y divide-dashed divide-border/50">
+            
+            <!-- School 1: ICCT Colleges Cainta Campus -->
+            <div class="reveal-item delay-1 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-foreground/[0.08] bg-white/5 p-1 shadow-sm" style="width:58px !important; height:58px !important; min-width:58px !important; min-height:58px !important;">
+                    <img alt="ICCT Colleges Foundation Inc. logo" class="object-contain w-full h-full" style="max-width:100% !important; max-height:100% !important;" src="icct-logo.png" />
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Bachelor of Science in Computer Engineering (BSCpE)</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                        </div>
+                        <div class="mt-1 flex items-center gap-2">
+                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Undergraduate · 3rd Year</span>
+                        </div>
+                        <div class="mt-1 text-sm font-medium text-muted-foreground">ICCT Colleges, Cainta Campus · Cainta, Rizal</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">3rd Year</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      <strong class="text-foreground/90 font-medium">Relevant Coursework &amp; Technical Competencies:</strong> Computer Literate, computer systems architecture, embedded hardware, circuit design, digital logic, and software-hardware interfaces.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- School 2: EARIST -->
+            <div class="reveal-item delay-2 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 flex shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-foreground/[0.08] bg-white/5 p-1 shadow-sm" style="width:58px !important; height:58px !important; min-width:58px !important; min-height:58px !important;">
+                    <img alt="Eulogio 'Amang' Rodriguez Institute of Science and Technology (EARIST) logo" class="object-contain w-full h-full" style="max-width:100% !important; max-height:100% !important;" src="earist-logo.png" />
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Computer Programming</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                        </div>
+                        <div class="mt-1 flex items-center gap-2">
+                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-sky-500/15 text-sky-400 border border-sky-500/30">Foundations</span>
+                        </div>
+                        <div class="mt-1 text-sm font-medium text-muted-foreground">Eulogio &quot;Amang&quot; Rodriguez Institute of Science and Technology (EARIST)</div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Programming Core</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Foundational grounding in computer programming principles, software logic, algorithm design, and applied computational problem solving.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= PROJECTS & SYSTEMS SECTION ================= -->
+      <section id="projects" class="relative scroll-mt-24">
+        
+        <!-- Doodle: ideas to reality -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -right-24 rotate-6" style="--doodle-rot: 6deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">ideas to reality</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 80 10 Q 60 40, 20 80"></path>
+            <path d="M 45 80 L 20 80 L 30 55"></path>
+          </svg>
+        </div>
+
+        <section class="relative w-full z-0 flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <h2 class="reveal-item px-2 py-5 sm:px-4 text-lg font-bold tracking-tight text-foreground flex items-center justify-between">
+            <span>Projects &amp; Systems</span>
+          </h2>
+
+          <div class="cards-blur-group flex flex-col divide-y divide-dashed divide-border/50">
+            
+            <!-- Project 1: Academic Management System -->
+            <div class="reveal-item delay-1 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 size-[52px] shrink-0 overflow-hidden corner-squircle rounded-3xl border border-sky-500/20 bg-sky-500/10 flex items-center justify-center text-sky-400 p-2.5">
+                    <!-- C++ Official Hexagonal ISO Mark SVG -->
+                    <svg class="size-7" viewBox="0 0 32 32" fill="none">
+                      <polygon points="16 2, 28 9, 28 23, 16 30, 4 23, 4 9" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.15"></polygon>
+                      <text x="16" y="20" font-family="monospace" font-size="9" font-weight="bold" fill="currentColor" text-anchor="middle">C++</text>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Academic Management System</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                          <span class="rounded bg-sky-500/10 border border-sky-500/20 px-2 py-0.5 text-[10px] font-medium text-sky-400 font-mono">Console App</span>
+                        </div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Core System</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Console-based academic management system built in C++ featuring student record indexing, course registration, automated GPA/grade calculations, and persistent binary file I/O.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 2: Automated Python & SQL Database Utility Suite -->
+            <div class="reveal-item delay-2 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 size-[52px] shrink-0 overflow-hidden corner-squircle rounded-3xl border border-emerald-500/20 bg-emerald-500/10 flex items-center justify-center text-emerald-400 p-2.5">
+                    <!-- Python & SQL Pipeline SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Automated Python &amp; SQL Database Utility Suite</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                          <span class="rounded bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-medium text-emerald-400 font-mono">Automation</span>
+                        </div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">ETL Suite</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Automated scripting suite for bulk query processing, CSV-to-relational ETL pipelines, automated database sanity testing, and periodic database snapshotting.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 3: Visual FoxPro Legacy Business Database -->
+            <div class="reveal-item delay-3 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 size-[52px] shrink-0 overflow-hidden corner-squircle rounded-3xl border border-amber-500/20 bg-amber-500/10 flex items-center justify-center text-amber-400 p-2.5">
+                    <!-- FoxPro Database Desktop App SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="8" y1="21" x2="16" y2="21"></line>
+                      <line x1="12" y1="17" x2="12" y2="21"></line>
+                      <line x1="6" y1="8" x2="18" y2="8"></line>
+                      <line x1="6" y1="12" x2="14" y2="12"></line>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Visual FoxPro Legacy Business Database</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                          <span class="rounded bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 text-[10px] font-medium text-amber-400 font-mono">Desktop DB</span>
+                        </div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Legacy</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Structured desktop database management application tailored for business transaction tracking, rapid record lookups, and structured tabular reporting.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 4: Clean & Responsive Web Suite -->
+            <div class="reveal-item delay-4 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 size-[52px] shrink-0 overflow-hidden corner-squircle rounded-3xl border border-cyan-500/20 bg-cyan-500/10 flex items-center justify-center text-cyan-400 p-2.5">
+                    <!-- Web Interface / Frontend Code SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="2" y1="7" x2="22" y2="7"></line>
+                      <polyline points="7 12 9 14 7 16"></polyline>
+                      <polyline points="17 12 15 14 17 16"></polyline>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Clean &amp; Responsive Web Suite</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                          <span class="rounded bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-medium text-cyan-400 font-mono">Web Suite</span>
+                        </div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Frontend</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Fast, responsive web interfaces built with modern JavaScript (ES6+), semantic HTML5, and utility-driven CSS. Focused on crisp micro-interactions and accessibility.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 5: Hardware Diagnostics & Thermal Stress Rig -->
+            <div class="reveal-item delay-4 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors">
+                <div class="flex items-start gap-3">
+                  <div class="card-icon-container relative mt-0.5 size-[52px] shrink-0 overflow-hidden corner-squircle rounded-3xl border border-violet-500/20 bg-violet-500/10 flex items-center justify-center text-violet-400 p-2.5">
+                    <!-- CPU Microchip / Hardware Rig SVG -->
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                      <rect x="9" y="9" width="6" height="6"></rect>
+                      <line x1="9" y1="1" x2="9" y2="4"></line>
+                      <line x1="15" y1="1" x2="15" y2="4"></line>
+                      <line x1="9" y1="20" x2="9" y2="23"></line>
+                      <line x1="15" y1="20" x2="15" y2="23"></line>
+                      <line x1="20" y1="9" x2="23" y2="9"></line>
+                      <line x1="20" y1="14" x2="23" y2="14"></line>
+                      <line x1="1" y1="9" x2="4" y2="9"></line>
+                      <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                          <h3 class="flex items-center gap-1.5 text-[15px] font-semibold leading-5 text-foreground">
+                            <span>Hardware Diagnostics &amp; Thermal Stress Rig</span>
+                            <span class="card-arrow text-xs text-muted-foreground">↗</span>
+                          </h3>
+                          <span class="rounded bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 text-[10px] font-medium text-violet-400 font-mono">Hardware Lab</span>
+                        </div>
+                      </div>
+                      <span class="shrink-0 pt-0.5 text-xs font-medium tracking-tight text-muted-foreground/70 font-mono">Benchmarking</span>
+                    </div>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      Custom PC component assembly, thermal throttling analysis, BIOS/firmware setup, thermal stress testing under heavy loads, and systematic POST troubleshooting.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= CERTIFICATES & SEMINARS SECTION ================= -->
+      <section id="certificates" class="relative scroll-mt-24">
+        
+        <!-- Doodle: verified credentials -->
+        <div class="doodle-container hidden xl:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-6 -right-28 rotate-6" style="--doodle-rot: 6deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">verified credentials</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 80 10 Q 60 40, 20 80"></path>
+            <path d="M 45 80 L 20 80 L 30 55"></path>
+          </svg>
+        </div>
+
+        <section class="relative w-full z-0 flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <div class="reveal-item px-2 py-5 sm:px-4 flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
+              <i data-lucide="award" class="size-5 text-amber-400"></i>
+              <span>Certificates &amp; Seminars</span>
+            </h2>
+            <span class="text-xs font-mono text-muted-foreground bg-accent/60 px-2.5 py-1 rounded-full border border-border/40">2 Verified</span>
+          </div>
+
+          <div class="cards-blur-group flex flex-col divide-y divide-dashed divide-border/50">
+            
+            <!-- Certificate 1: Secure Networking for Smart Environment (2026) -->
+            <div class="reveal-item delay-1 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card cert-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors" data-cert-img="cert-secure-networking.jpg" data-cert-pdf="cert-secure-networking.pdf" data-cert-title="Advancing Secure Networking for Smart Environment">
+                <div class="cert-card-layout">
+                  <!-- Thumbnail preview -->
+                  <div class="cert-thumb-box">
+                    <img alt="Certificate thumbnail" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" src="cert-secure-networking.jpg" />
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white text-xs font-mono font-medium backdrop-blur-[1px]">
+                      <i data-lucide="zoom-in" class="size-4"></i>
+                      <span>Inspect</span>
+                    </div>
+                    <span class="absolute top-2 left-2 px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-mono text-emerald-400 border border-emerald-500/30">March 2026</span>
+                  </div>
+
+                  <div class="cert-info-box">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="cert-title">
+                        Advancing Secure Networking for Smart Environment: Design, Threat Modeling, and Mitigation Strategies
+                      </h3>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Verified</span>
+                    </div>
+                    <div class="cert-meta">
+                      <span class="flex items-center gap-1"><i data-lucide="map-pin" class="size-3 text-muted-foreground/70"></i> ICCT Colleges &middot; COEDT &amp; DMNS</span>
+                      <span class="opacity-40">&middot;</span>
+                      <span>March 3, 2026</span>
+                    </div>
+                    <p class="cert-desc">
+                      Awarded to <strong class="text-foreground/90 font-medium">Andrew Garcia Manangan</strong> by the College of Engineering &amp; Digital Technology / Mathematics &amp; Natural Sciences for participating in the technical seminar facilitated by <strong class="text-foreground/90 font-medium">Engr. Mark Anthony Melendrez</strong> at ICCT Colleges Amphitheater. Addressed IoT network defense architectures, systematic threat modeling, and robust mitigation strategies.
+                    </p>
+                    <div class="cert-actions">
+                      <button type="button" class="btn-cert-preview inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary text-xs font-mono text-foreground border border-border/50 transition-colors" data-cert-img="cert-secure-networking.jpg" data-cert-pdf="cert-secure-networking.pdf" data-cert-title="Advancing Secure Networking for Smart Environment">
+                        <i data-lucide="maximize-2" class="size-3"></i>
+                        <span>View High-Res</span>
+                      </button>
+                      <a href="cert-secure-networking.pdf" download="Andrew_Manangan_Secure_Networking_Certificate.pdf" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent hover:bg-accent/80 text-xs font-mono text-foreground border border-border/40 transition-colors">
+                        <i data-lucide="download" class="size-3"></i>
+                        <span>Download PDF</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Certificate 2: IoT for Smart Environments (2025) -->
+            <div class="reveal-item delay-2 p-2 sm:p-4 relative z-0">
+              <article class="interactive-card cert-card group relative cursor-pointer p-4 sm:p-5 rounded-3xl hover:bg-accent/40 transition-colors" data-cert-img="cert-iot-smart-environments.jpg" data-cert-pdf="cert-iot-smart-environments.pdf" data-cert-title="Advancing Research and Development in IoT for Smart Environments">
+                <div class="cert-card-layout">
+                  <!-- Thumbnail preview -->
+                  <div class="cert-thumb-box">
+                    <img alt="Certificate thumbnail" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" src="cert-iot-smart-environments.jpg" />
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white text-xs font-mono font-medium backdrop-blur-[1px]">
+                      <i data-lucide="zoom-in" class="size-4"></i>
+                      <span>Inspect</span>
+                    </div>
+                    <span class="absolute top-2 left-2 px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-mono text-sky-400 border border-sky-500/30">March 2025</span>
+                  </div>
+
+                  <div class="cert-info-box">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="cert-title">
+                        Advancing Research and Development in IoT for Smart Environments: Innovations and Future Directions
+                      </h3>
+                      <span class="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Verified</span>
+                    </div>
+                    <div class="cert-meta">
+                      <span class="flex items-center gap-1"><i data-lucide="map-pin" class="size-3 text-muted-foreground/70"></i> ICCT Colleges &middot; 12th Engineering Day</span>
+                      <span class="opacity-40">&middot;</span>
+                      <span>March 6, 2025</span>
+                    </div>
+                    <p class="cert-desc">
+                      Awarded to <strong class="text-foreground/90 font-medium">Andrew G. Manangan</strong> as part of the 12th Engineering Day at Cainta Campus, facilitated by <strong class="text-foreground/90 font-medium">Engr. Mark Anthony V. Melendrez</strong>. Explored IoT hardware research, telemetry, smart sensor nodes, microcontroller networking, and innovative future directions.
+                    </p>
+                    <div class="cert-actions">
+                      <button type="button" class="btn-cert-preview inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary text-xs font-mono text-foreground border border-border/50 transition-colors" data-cert-img="cert-iot-smart-environments.jpg" data-cert-pdf="cert-iot-smart-environments.pdf" data-cert-title="Advancing Research and Development in IoT for Smart Environments">
+                        <i data-lucide="maximize-2" class="size-3"></i>
+                        <span>View High-Res</span>
+                      </button>
+                      <a href="cert-iot-smart-environments.pdf" download="Andrew_Manangan_IoT_Certificate.pdf" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent hover:bg-accent/80 text-xs font-mono text-foreground border border-border/40 transition-colors">
+                        <i data-lucide="download" class="size-3"></i>
+                        <span>Download PDF</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= GITHUB ACTIVITY SECTION ================= -->
+      <section id="github" class="relative scroll-mt-24">
+        
+        <!-- Doodle: the code -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -left-24 -rotate-2" style="--doodle-rot: -2deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">the code</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 20 10 Q 40 40, 80 80"></path>
+            <path d="M 55 80 L 80 80 L 70 55"></path>
+          </svg>
+        </div>
+
+        <section class="w-full flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <div class="reveal-item flex items-center justify-between px-2 py-5 sm:px-4">
+            <div>
+              <h2 class="text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
+                <span>GitHub Activity</span>
+              </h2>
+              <p class="text-xs text-muted-foreground mt-0.5 font-mono"><span id="gh-total-count" class="text-foreground font-semibold">19</span> contributions in the last year · github.com/Popcorn079</p>
+            </div>
+            <a href="https://github.com/Popcorn079" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1 rounded-full border border-border bg-secondary">
+              <span>View Profile</span>
+              <i data-lucide="arrow-up-right" class="size-3"></i>
+            </a>
+          </div>
+
+          <div class="reveal-item delay-1 p-4 sm:p-5 flex flex-col gap-3">
+            <!-- Accurate GitHub Contribution Heatmap matching Image 2 -->
+            <div class="github-grid-wrapper">
+              <div id="github-matrix" class="github-grid-cells" role="grid" aria-label="GitHub Activity Contribution Heatmap"></div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-muted-foreground pt-1">
+              <span id="gh-stats-summary">Active code contributions (19 in the last year)</span>
+              <div class="flex items-center gap-1.5 select-none">
+                <span>Less</span>
+                <span class="gh-legend-cell gh-lvl-0 border border-border/40" title="0 contributions"></span>
+                <span class="gh-legend-cell gh-lvl-1" title="1-2 contributions"></span>
+                <span class="gh-legend-cell gh-lvl-2" title="3-4 contributions"></span>
+                <span class="gh-legend-cell gh-lvl-3" title="5-9 contributions"></span>
+                <span class="gh-legend-cell gh-lvl-4" title="10+ contributions"></span>
+                <span>More</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= TECH STACK ("MY TOOLBOX") ================= -->
+      <section id="stack" class="relative scroll-mt-24">
+        
+        <!-- Doodle: my toolbox -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -right-24 rotate-2" style="--doodle-rot: 2deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">my toolbox</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 80 10 Q 60 40, 20 80"></path>
+            <path d="M 45 80 L 20 80 L 30 55"></path>
+          </svg>
+        </div>
+
+        <section class="relative w-full z-0 flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <h2 class="reveal-item px-2 py-5 sm:px-4 text-lg font-bold tracking-tight text-foreground flex items-center">
+            <span>Stack</span>
+          </h2>
+
+          <div class="flex flex-col divide-y divide-dashed transition-colors duration-300 divide-border/50">
+            
+            <!-- Category 1: Languages -->
+            <div class="reveal-item delay-1 flex flex-col gap-3.5 p-4 sm:p-5 relative z-0">
+              <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/80 ml-1">Languages</h3>
+              <div class="flex flex-wrap gap-2">
+                
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="C++ logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/cplusplus" />
+                    <span>C++</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="Python logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/python" />
+                    <span>Python</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="database" class="size-3.5 text-amber-500"></i>
+                    <span>Visual FoxPro</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="JavaScript logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/javascript" />
+                    <span>JavaScript (ES6+)</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="SQL logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/postgresql" />
+                    <span>SQL</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="HTML5 logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/html5" />
+                    <span>HTML5</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="CSS3 logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/css" />
+                    <span>CSS3</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Category 2: Hardware & Diagnostics -->
+            <div class="reveal-item delay-2 flex flex-col gap-3.5 p-4 sm:p-5 relative z-0">
+              <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/80 ml-1">Hardware &amp; Diagnostics</h3>
+              <div class="flex flex-wrap gap-2">
+                
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="cpu" class="size-3.5 text-sky-400"></i>
+                    <span>PC Component Assembly</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="wrench" class="size-3.5 text-amber-400"></i>
+                    <span>Hardware Troubleshooting</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="flame" class="size-3.5 text-rose-400"></i>
+                    <span>Thermal Stress Testing</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="gauge" class="size-3.5 text-emerald-400"></i>
+                    <span>System Benchmarking</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="settings" class="size-3.5 text-cyan-400"></i>
+                    <span>BIOS / Firmware Setup</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Category 3: Developer Tools & Environments -->
+            <div class="reveal-item delay-3 flex flex-col gap-3.5 p-4 sm:p-5 relative z-0">
+              <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/80 ml-1">Tools &amp; Environments</h3>
+              <div class="flex flex-wrap gap-2">
+                
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="VS Code logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/visualstudiocode" />
+                    <span>VS Code</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <img alt="Git logo" width="14" height="14" class="size-3.5 object-contain grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110" src="https://cdn.simpleicons.org/git" />
+                    <span>Git &amp; GitHub</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="terminal" class="size-3.5 text-blue-400"></i>
+                    <span>PowerShell &amp; Terminal</span>
+                  </div>
+                </div>
+
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="file-spreadsheet" class="size-3.5 text-emerald-500"></i>
+                    <span>MS Office Suite</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= AI DEVELOPER TOOLS (MATCHING STACK LAYOUT) ================= -->
+      <section id="ai-tools" class="relative scroll-mt-24">
+        
+        <!-- Doodle: my ai stack -->
+        <div class="doodle-container hidden lg:flex absolute flex-col items-center text-muted-foreground pointer-events-none select-none z-10 top-8 -left-28 -rotate-3" style="--doodle-rot: -3deg;">
+          <span class="font-doodle text-2xl tracking-wider whitespace-nowrap text-muted-foreground">my ai stack</span>
+          <svg class="doodle-arrow w-12 h-12 mt-1 overflow-visible" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 20 10 Q 40 40, 80 80"></path>
+            <path d="M 55 80 L 80 80 L 70 55"></path>
+          </svg>
+        </div>
+
+        <section class="relative w-full z-0 flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px border-border/50 divide-border/50">
+          <h2 class="reveal-item px-2 py-5 sm:px-4 text-lg font-bold tracking-tight text-foreground flex items-center">
+            <span>AI Developer Tools</span>
+          </h2>
+
+          <div class="flex flex-col divide-y divide-dashed transition-colors duration-300 divide-border/50">
+            
+            <!-- Category 1: Models & Assistants -->
+            <div class="reveal-item delay-1 flex flex-col gap-3.5 p-4 sm:p-5 relative z-0">
+              <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/80 ml-1">Models &amp; Assistants</h3>
+              <div class="flex flex-wrap gap-2">
+                
+                <!-- ChatGPT (OpenAI) -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Prompt architecture, API integrations, structured data synthesis, and backend LLM pipelines">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <svg class="size-3.5 object-contain text-emerald-400 opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.6667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l3.102-1.7999 3.102 1.7999v3.5905L12.506 15.888l-3.102-1.7999z"/>
+                    </svg>
+                    <span>ChatGPT</span>
+                  </div>
+                </div>
+
+                <!-- Google Gemini -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Multimodal reasoning, massive-context retrieval, document parsing, and architectural prototyping">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <svg class="size-3.5 object-contain text-blue-400 opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 24c0-6.627-5.373-12-12-12 6.627 0 12-5.373 12-12 0 6.627 5.373 12 12 12-6.627 0-12 5.373-12 12z"/>
+                    </svg>
+                    <span>Google Gemini</span>
+                  </div>
+                </div>
+
+                <!-- Anthropic Claude -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Precision coding logic, deterministic artifact generation, and systems hardware documentation">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <svg class="size-3.5 object-contain text-amber-500 opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15zM7.5 5.5C6.67 5.5 6 6.17 6 7s.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-9zM6 16.5C5.17 16.5 4.5 17.17 4.5 18s.67 1.5 1.5 1.5h12c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H6z"/>
+                    </svg>
+                    <span>Claude (Anthropic)</span>
+                  </div>
+                </div>
+
+                <!-- GitHub Copilot -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Real-time inline pair programming, regex synthesis, and API endpoint scaffolding">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <svg class="size-3.5 object-contain text-purple-400 opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.53 1.03 1.53 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+                    <span>GitHub Copilot</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Category 2: Agentic Systems & Workflows -->
+            <div class="reveal-item delay-2 flex flex-col gap-3.5 p-4 sm:p-5 relative z-0">
+              <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/80 ml-1">Agentic Systems &amp; Workflows</h3>
+              <div class="flex flex-wrap gap-2">
+                
+                <!-- Google Antigravity -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Autonomous multi-agent orchestration, complex codebase refactoring, and asynchronous tooling">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <svg class="size-3.5 object-contain text-cyan-400 opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M12 3a9 9 0 0 1 9 9"></path>
+                      <path d="M12 7a5 5 0 0 1 5 5"></path>
+                    </svg>
+                    <span>Google Antigravity</span>
+                  </div>
+                </div>
+
+                <!-- Autonomous Multi-Agent Systems -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Autonomous subagent hierarchy, task delegation, and persistent background job management">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="bot" class="size-3.5 text-pink-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span>Autonomous Multi-Agent Systems</span>
+                  </div>
+                </div>
+
+                <!-- Prompt Architecture -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Few-shot structured prompting, system role instructions, and deterministic JSON schemas">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="sparkles" class="size-3.5 text-amber-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span>Prompt Architecture</span>
+                  </div>
+                </div>
+
+                <!-- LLM API Pipelines -->
+                <div class="group inline-flex cursor-default rounded-full corner-squircle border border-foreground/10 p-1 transition-all duration-300 ease-out hover:-translate-y-0.5" title="Chained function calling, tool use interfaces, and streaming token responses">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent hover:bg-accent/90 corner-squircle rounded-2xl text-xs font-medium text-muted-foreground group-hover:text-foreground border border-border/40 leading-none transition-colors duration-300">
+                    <i data-lucide="workflow" class="size-3.5 text-teal-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span>LLM API Pipelines</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="relative w-full flex flex-col border border-dashed divide-y divide-dashed transition-colors duration-300 -mt-px pb-16 border-border/50 divide-border/50">
+        <div class="flex flex-col items-center justify-between gap-6 sm:flex-row px-2 py-8 sm:px-4">
+          <h2 class="font-serif text-3xl tracking-tight text-foreground">A.M</h2>
+          <ul class="flex flex-wrap justify-center items-center gap-5 text-sm font-medium text-muted-foreground">
+            <li><a href="https://github.com/Popcorn079" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">GitHub</a></li>
+            <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">Facebook</a></li>
+            <li><a href="mailto:andrewmanangan6@gmail.com" class="email-trigger transition-colors hover:text-foreground">Email</a></li>
+            <li><a href="Andrew_Manangan_Resume.pdf" download class="transition-colors hover:text-foreground">Resume</a></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col-reverse items-center justify-between gap-4 text-xs tracking-wide text-muted-foreground sm:flex-row px-2 py-6 sm:px-4">
+          <div class="flex items-center gap-2 opacity-80">
+            <span>&copy; 2026 Andrew G. Manangan</span>
+            <span>·</span>
+            <span>Designed &amp; Built with precision</span>
+          </div>
+          <div>
+            <a href="https://github.com/Popcorn079" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-1.5 transition-colors hover:text-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M244,116H186.79a60,60,0,0,0-117.58,0H12a12,12,0,0,0,0,24H69.21a60,60,0,0,0,117.58,0H244a12,12,0,0,0,0-24ZM128,164a36,36,0,1,1,36-36A36,36,0,0,1,128,164Z"></path>
+              </svg>
+              <span><strong class="font-semibold text-foreground">19</strong> contributions in the last year</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer Banner Video (Cinematic Ambient Loop) -->
+        <div class="px-2 pt-6 sm:px-4">
+          <div class="reveal-item footer-banner-container relative w-full overflow-hidden corner-squircle rounded-3xl">
+            <video autoplay loop muted playsinline poster="footer-banner.jpg" class="absolute inset-0 w-full h-full object-cover">
+              <source src="footer-banner.mp4" type="video/mp4" />
+              <img alt="Footer animated banner" src="footer-banner.jpg" class="w-full h-full object-cover" />
+            </video>
+            <!-- 4-Directional Vignette Fades to blend seamlessly -->
+            <div class="absolute inset-x-0 top-0 h-10 sm:h-14 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-x-0 bottom-0 h-12 sm:h-16 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none"></div>
+            <div class="absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Command Palette Modal (Ctrl+K) -->
+  <div id="cmd-palette" class="fixed inset-0 z-50 hidden items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-md">
+    <div class="relative w-full max-w-lg rounded-2xl border border-border bg-card shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center gap-3 px-4 py-3 border-b border-border">
+        <i data-lucide="search" class="size-4 text-muted-foreground"></i>
+        <input id="cmd-search" type="text" placeholder="Type a section or command..." class="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none font-mono" />
+        <kbd id="cmd-close" class="cursor-pointer text-[10px] font-mono px-2 py-0.5 rounded bg-secondary border border-border text-muted-foreground hover:text-foreground">ESC</kbd>
+      </div>
+      <div id="cmd-list" class="max-h-80 overflow-y-auto p-2 flex flex-col gap-1 text-sm">
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#hero">
+          <span class="flex items-center gap-2"><i data-lucide="user" class="size-4 text-muted-foreground"></i> About</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#experience">
+          <span class="flex items-center gap-2"><i data-lucide="briefcase" class="size-4 text-muted-foreground"></i> Experience</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#education">
+          <span class="flex items-center gap-2"><i data-lucide="graduation-cap" class="size-4 text-muted-foreground"></i> Education</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#projects">
+          <span class="flex items-center gap-2"><i data-lucide="code-2" class="size-4 text-muted-foreground"></i> Projects &amp; Systems</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#certificates">
+          <span class="flex items-center gap-2"><i data-lucide="award" class="size-4 text-muted-foreground"></i> Certificates</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#github">
+          <span class="flex items-center gap-2"><i data-lucide="git-commit" class="size-4 text-muted-foreground"></i> GitHub Activity</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#stack">
+          <span class="flex items-center gap-2"><i data-lucide="layers" class="size-4 text-muted-foreground"></i> Tech Stack</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <button type="button" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors" data-target="#ai-tools">
+          <span class="flex items-center gap-2"><i data-lucide="bot" class="size-4 text-muted-foreground"></i> AI Developer Tools</span>
+          <span class="text-xs font-mono text-muted-foreground">Jump</span>
+        </button>
+        <div class="h-px bg-border my-1"></div>
+        <button type="button" id="cmd-copy-email" class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors">
+          <span class="flex items-center gap-2"><i data-lucide="copy" class="size-4 text-muted-foreground"></i> Copy Email Address</span>
+          <span class="text-xs font-mono text-muted-foreground">Action</span>
+        </button>
+        <a href="Andrew_Manangan_Resume.pdf" download class="cmd-row flex items-center justify-between px-3 py-2 rounded-xl hover:bg-accent text-left text-foreground transition-colors">
+          <span class="flex items-center gap-2"><i data-lucide="file-down" class="size-4 text-muted-foreground"></i> Download Resume (PDF)</span>
+          <span class="text-xs font-mono text-muted-foreground">File</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Direct Send Modal -->
+  <div id="email-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/75 backdrop-blur-md transition-opacity duration-200">
+    <div class="relative w-full max-w-md rounded-3xl border border-border bg-card p-6 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Close button -->
+      <button id="email-modal-close" type="button" class="absolute top-4 right-4 p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors" title="Close (ESC)">
+        <i data-lucide="x" class="size-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-3">
+        <div class="size-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 shrink-0">
+          <i data-lucide="mail" class="size-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-semibold text-foreground">Send an Email to Andrew</h3>
+          <p class="text-xs font-mono text-muted-foreground">andrewmanangan6@gmail.com</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-muted-foreground leading-relaxed mb-4">
+        Choose your preferred platform below to compose and send your email directly:
+      </p>
+
+      <div class="flex flex-col gap-2.5">
+        <!-- Option 1: Gmail in Browser (Recommended) -->
+        <a id="btn-open-gmail" href="https://mail.google.com/mail/?view=cm&fs=1&to=andrewmanangan6@gmail.com&su=Portfolio%20Inquiry%20to%20Andrew%20Manangan" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-2xl border border-border/80 bg-secondary/40 hover:bg-secondary hover:border-foreground/20 text-foreground transition-all group">
+          <div class="flex items-center gap-3">
+            <div class="size-9 rounded-xl bg-red-500/15 text-red-500 flex items-center justify-center shrink-0">
+              <svg class="size-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors flex items-center gap-1.5">
+                <span>Open in Gmail (Web)</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-red-500/10 text-red-400 font-normal">Direct</span>
+              </div>
+              <div class="text-[11px] text-muted-foreground font-mono">Composes directly in your browser</div>
+            </div>
+          </div>
+          <i data-lucide="external-link" class="size-4 text-muted-foreground group-hover:text-foreground transition-colors"></i>
+        </a>
+
+        <!-- Option 2: Default System Mail Client (Outlook, Apple Mail, etc) -->
+        <a id="btn-open-client" href="mailto:andrewmanangan6@gmail.com?subject=Portfolio%20Inquiry%20to%20Andrew%20Manangan" class="flex items-center justify-between p-3.5 rounded-2xl border border-border/80 bg-secondary/40 hover:bg-secondary hover:border-foreground/20 text-foreground transition-all group">
+          <div class="flex items-center gap-3">
+            <div class="size-9 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center shrink-0">
+              <i data-lucide="send" class="size-4"></i>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">Open in System Mail App</div>
+              <div class="text-[11px] text-muted-foreground font-mono">Outlook, Windows Mail, or Apple Mail</div>
+            </div>
+          </div>
+          <i data-lucide="arrow-up-right" class="size-4 text-muted-foreground group-hover:text-foreground transition-colors"></i>
+        </a>
+
+        <!-- Option 3: Copy Email to Clipboard -->
+        <button id="btn-copy-address" type="button" class="flex items-center justify-between p-3.5 rounded-2xl border border-border/80 bg-secondary/40 hover:bg-secondary hover:border-foreground/20 text-foreground transition-all group text-left cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="size-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+              <i data-lucide="copy" class="size-4"></i>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">Copy Email Address</div>
+              <div class="text-[11px] text-muted-foreground font-mono">andrewmanangan6@gmail.com</div>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono px-2 py-1 rounded-full bg-accent border border-border text-muted-foreground">Copy</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Capsule -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div class="rounded-full bg-zinc-900 text-white border border-zinc-700 px-4 py-2 text-xs font-mono shadow-2xl flex items-center gap-2">
+      <i data-lucide="check-circle-2" class="size-4 text-emerald-400"></i>
+      <span id="toast-text">Message</span>
+    </div>
+  </div>
+
+  <!-- Certificate High-Res Lightbox Modal -->
+  <div id="cert-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300">
+    <div id="cert-modal-box" class="relative max-w-4xl w-full max-h-[92vh] flex flex-col rounded-3xl border border-white/15 bg-background shadow-2xl overflow-hidden scale-95 transition-transform duration-300">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-border bg-card/60">
+        <div class="flex items-center gap-2 min-w-0 pr-4">
+          <i data-lucide="award" class="size-4 text-amber-400 shrink-0"></i>
+          <span id="cert-modal-title" class="text-xs sm:text-sm font-semibold truncate text-foreground font-sans">Certificate</span>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a id="cert-modal-download" href="#" target="_blank" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accent text-xs font-mono text-foreground hover:bg-accent/80 border border-border/40 transition-colors">
+            <i data-lucide="download" class="size-3.5"></i>
+            <span>PDF</span>
+          </a>
+          <button id="cert-modal-close" type="button" class="p-1.5 rounded-xl hover:bg-accent text-muted-foreground hover:text-foreground transition-colors" title="Close (Esc)">
+            <i data-lucide="x" class="size-4"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 overflow-auto p-2 sm:p-4 flex items-center justify-center bg-black/40">
+        <img id="cert-modal-img" src="" alt="Certificate" class="max-w-full max-h-[76vh] object-contain rounded-xl shadow-2xl border border-white/10" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Ensure all videos play continuously
+    function keepVideosPlaying() {
+      document.querySelectorAll('video').forEach(vid => {
+        vid.muted = true;
+        const p = vid.play();
+        if (p !== undefined) p.catch(() => {});
+      });
+    }
+    keepVideosPlaying();
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) keepVideosPlaying();
+    });
+
+    // 1. Audio Feedback Engine
+    class SoundEngine {
+      constructor() {
+        this.enabled = true;
+        this.audioCtx = null;
+      }
+      initCtx() {
+        if (!this.audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.audioCtx = new AudioContext();
+        }
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+      }
+      play() {
+        if (!this.enabled) return;
+        this.initCtx();
+        if (!this.audioCtx) return;
+        try {
+          const osc = this.audioCtx.createOscillator();
+          const gain = this.audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, this.audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(140, this.audioCtx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.06, this.audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(this.audioCtx.destination);
+          osc.start();
+          osc.stop(this.audioCtx.currentTime + 0.04);
+        } catch (e) {}
+      }
+      toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+      }
+    }
+    const sound = new SoundEngine();
+
+    // Attach click sound to all interactive buttons & links
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('button, a, .interactive-card, input[type="checkbox"], .cmd-row')) {
+        sound.play();
+      }
+    });
+
+    // Toast Manager
+    let toastTimeout;
+    function triggerToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2600);
+    }
+
+    // 2. Sound Toggle
+    const soundBtn = document.getElementById('sound-toggle');
+    const soundIcon = document.getElementById('sound-icon');
+    const soundLabel = document.getElementById('sound-label');
+    if (soundBtn) {
+      soundBtn.addEventListener('click', () => {
+        const isEnabled = sound.toggle();
+        if (isEnabled) {
+          syncAudioUI(true);
+          triggerToast('Audio feedback enabled');
+        } else {
+          syncAudioUI(false);
+          triggerToast('Audio feedback muted');
+        }
+        lucide.createIcons();
+      });
+    }
+
+    // 3. Dark / Light Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlEl = document.documentElement;
+
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        htmlEl.classList.remove('dark');
+        themeIcon.setAttribute('data-lucide', 'moon');
+        localStorage.setItem('theme', 'light');
+      }
+      lucide.createIcons();
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') setTheme(false);
+    else setTheme(true);
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isCurrentlyDark = htmlEl.classList.contains('dark');
+        setTheme(!isCurrentlyDark);
+        triggerToast(!isCurrentlyDark ? 'Dark theme enabled' : 'Light theme enabled');
+      });
+    }
+
+    // 4. Blueprint Grid Toggle & Audio Pill Sync
+    const gridSwitchBtn = document.getElementById('grid-switch-btn');
+    if (gridSwitchBtn) {
+      gridSwitchBtn.addEventListener('click', () => {
+        const isCurrentlyActive = gridSwitchBtn.classList.contains('active');
+        if (!isCurrentlyActive) {
+          gridSwitchBtn.classList.add('active');
+          gridSwitchBtn.setAttribute('aria-checked', 'true');
+          document.body.classList.add('show-blueprint-grid');
+          triggerToast('Blueprint grid enabled');
+        } else {
+          gridSwitchBtn.classList.remove('active');
+          gridSwitchBtn.setAttribute('aria-checked', 'false');
+          document.body.classList.remove('show-blueprint-grid');
+          triggerToast('Blueprint grid disabled');
+        }
+      });
+    }
+
+    // Audio Sync (Banner Sound Button & Profile Audio Pill)
+    const profileAudioPill = document.getElementById('profile-audio-pill');
+    const pillAudioIcon = document.getElementById('pill-audio-icon');
+
+    function syncAudioUI(isEnabled) {
+      if (soundIcon) soundIcon.setAttribute('data-lucide', isEnabled ? 'volume-2' : 'volume-x');
+      if (soundLabel) soundLabel.textContent = isEnabled ? 'Sound' : 'Muted';
+      if (pillAudioIcon) pillAudioIcon.setAttribute('data-lucide', isEnabled ? 'volume-2' : 'volume-x');
+      const pillLabel = document.getElementById('pill-audio-label');
+      if (pillLabel) pillLabel.textContent = isEnabled ? 'Sound' : 'Muted';
+      if (profileAudioPill) {
+        if (isEnabled) profileAudioPill.classList.add('audio-playing');
+        else profileAudioPill.classList.remove('audio-playing');
+      }
+      lucide.createIcons();
+    }
+
+    if (profileAudioPill) {
+      profileAudioPill.addEventListener('click', () => {
+        const isEnabled = sound.toggle();
+        syncAudioUI(isEnabled);
+        triggerToast(isEnabled ? 'Audio feedback enabled' : 'Audio feedback muted');
+      });
+    }
+
+    // 5. Mechanical Scrollbar Control
+    const track = document.getElementById('mechanical-track');
+    const thumb = document.getElementById('mechanical-thumb');
+    let isDraggingThumb = false;
+
+    function syncScrollbar() {
+      if (!track || !thumb || isDraggingThumb) return;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight <= 0) return;
+      const progress = Math.min(1, Math.max(0, window.scrollY / scrollHeight));
+      const trackHeight = track.clientHeight - thumb.clientHeight;
+      const thumbY = progress * trackHeight;
+      thumb.style.transform = 'translate(-50%, ' + thumbY + 'px)';
+    }
+
+    window.addEventListener('scroll', syncScrollbar, { passive: true });
+    window.addEventListener('resize', syncScrollbar);
+    setTimeout(syncScrollbar, 200);
+
+    function scrollPageToY(clientY) {
+      const rect = track.getBoundingClientRect();
+      const clickY = clientY - rect.top - (thumb.clientHeight / 2);
+      const trackHeight = rect.height - thumb.clientHeight;
+      const clampedY = Math.max(0, Math.min(clickY, trackHeight));
+      const progress = clampedY / trackHeight;
+      const targetScroll = progress * (document.documentElement.scrollHeight - window.innerHeight);
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    }
+
+    if (track) {
+      track.addEventListener('click', (e) => {
+        if (e.target.closest('#mechanical-thumb')) return;
+        scrollPageToY(e.clientY);
+      });
+    }
+
+    if (thumb) {
+      thumb.addEventListener('mousedown', (e) => {
+        isDraggingThumb = true;
+        document.body.style.userSelect = 'none';
+        const startY = e.clientY;
+        const rect = track.getBoundingClientRect();
+        const initialThumbY = thumb.getBoundingClientRect().top - rect.top;
+
+        function onMouseMove(moveEvent) {
+          const deltaY = moveEvent.clientY - startY;
+          const trackHeight = rect.height - thumb.clientHeight;
+          const newThumbY = Math.max(0, Math.min(initialThumbY + deltaY, trackHeight));
+          thumb.style.transform = 'translate(-50%, ' + newThumbY + 'px)';
+          const progress = newThumbY / trackHeight;
+          window.scrollTo({ top: progress * (document.documentElement.scrollHeight - window.innerHeight) });
+        }
+
+        function onMouseUp() {
+          isDraggingThumb = false;
+          document.body.style.userSelect = '';
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
+        }
+
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      });
+    }
+
+    // 6. Active Nav ScrollSpy
+    const sections = ['hero', 'experience', 'education', 'projects', 'certificates', 'github', 'stack', 'ai-tools'];
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 180;
+      let currentSection = 'hero';
+
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPos) {
+          currentSection = id;
+        }
+      }
+
+      navLinks.forEach(link => {
+        const target = link.getAttribute('data-section');
+        const indicator = link.querySelector('.nav-indicator');
+        const text = link.querySelector('.nav-text');
+        if (target === currentSection) {
+          link.classList.add('active');
+          if (indicator) {
+            indicator.style.opacity = '1';
+            indicator.style.transform = 'translate(-50%, 0) scale(1)';
+          }
+          if (text) text.classList.replace('text-muted-foreground', 'text-foreground');
+        } else {
+          link.classList.remove('active');
+          if (indicator) {
+            indicator.style.opacity = '0';
+            indicator.style.transform = 'translate(-50%, 0) scale(0)';
+          }
+          if (text) text.classList.replace('text-foreground', 'text-muted-foreground');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // 7. Command Palette (Ctrl+K)
+    const cmdPalette = document.getElementById('cmd-palette');
+    const cmdSearch = document.getElementById('cmd-search');
+    const cmdBtn = document.getElementById('cmd-btn');
+    const cmdClose = document.getElementById('cmd-close');
+
+    function openCmd() {
+      if (!cmdPalette) return;
+      cmdPalette.classList.remove('hidden');
+      cmdPalette.classList.add('flex');
+      if (cmdSearch) {
+        cmdSearch.value = '';
+        cmdSearch.focus();
+      }
+    }
+
+    function closeCmd() {
+      if (!cmdPalette) return;
+      cmdPalette.classList.add('hidden');
+      cmdPalette.classList.remove('flex');
+    }
+
+    if (cmdBtn) cmdBtn.addEventListener('click', openCmd);
+    if (cmdClose) cmdClose.addEventListener('click', closeCmd);
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (cmdPalette.classList.contains('hidden')) openCmd();
+        else closeCmd();
+      } else if (e.key === 'Escape') {
+        closeCmd();
+        closeCertModal();
+      }
+    });
+
+    if (cmdPalette) {
+      cmdPalette.addEventListener('click', (e) => {
+        if (e.target === cmdPalette) closeCmd();
+      });
+    }
+
+    document.querySelectorAll('.cmd-row[data-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        closeCmd();
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    if (cmdSearch) {
+      cmdSearch.addEventListener('input', () => {
+        const q = cmdSearch.value.toLowerCase().trim();
+        document.querySelectorAll('#cmd-list .cmd-row').forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(q) ? 'flex' : 'none';
+        });
+      });
+    }
+
+    // 8. Copy Email Helper
+    function copyEmail() {
+      const email = 'andrewmanangan6@gmail.com';
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+          triggerToast('Email copied to clipboard!');
+        }).catch(() => {
+          triggerToast(email);
+        });
+      } else {
+        triggerToast(email);
+      }
+    }
+
+    const copyBtn = document.getElementById('copy-email-btn');
+    if (copyBtn) copyBtn.addEventListener('click', copyEmail);
+
+    const cmdCopyEmail = document.getElementById('cmd-copy-email');
+    if (cmdCopyEmail) {
+      cmdCopyEmail.addEventListener('click', () => {
+        closeCmd();
+        copyEmail();
+      });
+    }
+
+    // 9. Quick Inquiry Form (Directs to Gmail or Mail Client)
+    const contactForm = document.getElementById('contact-form');
+    const contactMsg = document.getElementById('contact-msg');
+
+    function submitInquiry(e) {
+      if (e) e.preventDefault();
+      const msg = contactMsg ? contactMsg.value.trim() : '';
+      if (!msg) {
+        triggerToast('Please type a message first');
+        return;
+      }
+      const subject = encodeURIComponent('Portfolio Inquiry to Andrew Manangan');
+      const body = encodeURIComponent(msg + '\n\n— Sent from andrewmanangan.space portfolio');
+
+      // Copy text to clipboard so it is never lost
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(msg).catch(() => {});
+      }
+
+      // Open Gmail Web compose in a new tab with the user's message pre-filled
+      const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=andrewmanangan6@gmail.com&su=' + subject + '&body=' + body;
+      window.open(gmailUrl, '_blank');
+
+      // Also trigger mailto fallback
+      setTimeout(() => {
+        window.location.href = 'mailto:andrewmanangan6@gmail.com?subject=' + subject + '&body=' + body;
+      }, 600);
+
+      triggerToast('Directing you to send email...');
+      if (contactMsg) contactMsg.value = '';
+    }
+
+    // 9b. Email Direct Modal Logic
+    const emailModal = document.getElementById('email-modal');
+    const emailModalClose = document.getElementById('email-modal-close');
+    const btnCopyAddress = document.getElementById('btn-copy-address');
+
+    function openEmailModal() {
+      if (!emailModal) return;
+      emailModal.classList.remove('hidden');
+      emailModal.classList.add('flex');
+    }
+
+    function closeEmailModal() {
+      if (!emailModal) return;
+      emailModal.classList.add('hidden');
+      emailModal.classList.remove('flex');
+    }
+
+    if (emailModalClose) emailModalClose.addEventListener('click', closeEmailModal);
+    if (emailModal) {
+      emailModal.addEventListener('click', (e) => {
+        if (e.target === emailModal) closeEmailModal();
+      });
+    }
+
+    // Attach email-trigger to all email links
+    document.querySelectorAll('.email-trigger').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openEmailModal();
+      });
+    });
+
+    if (btnCopyAddress) {
+      btnCopyAddress.addEventListener('click', () => {
+        copyEmail();
+        closeEmailModal();
+      });
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', submitInquiry);
+    }
+    if (contactMsg) {
+      contactMsg.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          submitInquiry();
+        }
+      });
+    }
+
+    // 10. Accurate GitHub Heatmap for Popcorn079 (19 contributions)
+    function buildHeatmap() {
+      const matrix = document.getElementById('github-matrix');
+      if (!matrix) return;
+      matrix.innerHTML = '';
+
+      // Real GitHub calendar: 53 weeks (371 days) starting from Sunday Oct 19, 2025
+      const weeks = 53;
+      const daysPerWeek = 7;
+      const totalCells = weeks * daysPerWeek;
+
+      // Authentic live contributions for Popcorn079 totaling 19 commits
+      const activeContributions = {
+        '2026-10-12': { count: 10, level: 4 },
+        '2026-10-16': { count: 4, level: 4 },
+        '2026-10-17': { count: 2, level: 2 },
+        '2026-10-18': { count: 1, level: 1 },
+        '2026-10-19': { count: 2, level: 2 }
+      };
+
+      const startDate = new Date(2025, 9, 19); // Oct 19, 2025
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      for (let i = 0; i < totalCells; i++) {
+        const d = new Date(startDate);
+        d.setDate(startDate.getDate() + i);
+
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const dateKey = year + '-' + month + '-' + day;
+        const dateFormatted = months[d.getMonth()] + ' ' + d.getDate() + ', ' + year;
+
+        const cell = document.createElement('div');
+        const info = activeContributions[dateKey];
+
+        if (info) {
+          cell.className = 'gh-cell gh-lvl-' + info.level;
+          cell.title = info.count + ' contribution' + (info.count > 1 ? 's' : '') + ' on ' + dateFormatted;
+        } else {
+          cell.className = 'gh-cell gh-lvl-0';
+          cell.title = 'No contributions on ' + dateFormatted;
+        }
+
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('tabindex', '-1');
+        cell.setAttribute('data-date', dateKey);
+
+        matrix.appendChild(cell);
+      }
+    }
+    buildHeatmap();
+
+    // 11. Scroll Reveal Animations & Doodle Drawing
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          if (entry.target.classList.contains('doodle-container')) {
+            const arrow = entry.target.querySelector('.doodle-arrow');
+            if (arrow) arrow.classList.add('drawn');
+            setTimeout(() => {
+              entry.target.classList.add('active-float');
+            }, 1200);
+          }
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal-item, .doodle-container').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // 12. Interactive AI Detail Inspector
+    const aiDetailBox = document.getElementById('ai-detail-box');
+    const aiDetailText = document.getElementById('ai-detail-text');
+
+    document.querySelectorAll('.ai-tool-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const title = card.getAttribute('data-ai-title');
+        const detail = card.getAttribute('data-ai-detail');
+        if (aiDetailText) {
+          aiDetailText.innerHTML = '<strong class="text-foreground">' + title + ':</strong> ' + detail;
+        }
+      });
+    });
+
+    // 14. Interactive Card Selection Focus & Blur
+    const blurGroups = document.querySelectorAll('.cards-blur-group');
+
+    document.querySelectorAll('.interactive-card, .ai-tool-card').forEach(card => {
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+
+      function handleCardSelect(e) {
+        // If clicking a download link or specific preview button inside, let it proceed
+        if (e.target.closest('a[download], button')) {
+          return;
+        }
+
+        const group = card.closest('.cards-blur-group');
+        if (!group) return;
+
+        const isCurrentlySelected = card.classList.contains('card-selected');
+
+        // Clear selection across all groups so only one card is focused
+        blurGroups.forEach(g => {
+          g.classList.remove('has-selected');
+          g.querySelectorAll('.interactive-card, .ai-tool-card').forEach(c => {
+            c.classList.remove('card-selected');
+            c.removeAttribute('aria-selected');
+          });
+        });
+
+        if (!isCurrentlySelected) {
+          card.classList.add('card-selected');
+          card.setAttribute('aria-selected', 'true');
+          group.classList.add('has-selected');
+        }
+      }
+
+      card.addEventListener('click', handleCardSelect);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardSelect(e);
+        }
+      });
+    });
+
+    // Deselect cards when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.interactive-card, .ai-tool-card, #cert-modal')) {
+        blurGroups.forEach(g => {
+          g.classList.remove('has-selected');
+          g.querySelectorAll('.interactive-card, .ai-tool-card').forEach(c => {
+            c.classList.remove('card-selected');
+            c.removeAttribute('aria-selected');
+          });
+        });
+      }
+    });
+
+    // 13. Certificate Lightbox Modal
+    const certModal = document.getElementById('cert-modal');
+    const certModalImg = document.getElementById('cert-modal-img');
+    const certModalTitle = document.getElementById('cert-modal-title');
+    const certModalDownload = document.getElementById('cert-modal-download');
+    const certModalClose = document.getElementById('cert-modal-close');
+
+    function openCertModal(imgSrc, pdfSrc, title) {
+      if (!certModal) return;
+      certModalImg.src = imgSrc;
+      certModalTitle.textContent = title;
+      certModalDownload.href = pdfSrc;
+      certModal.classList.remove('hidden');
+      certModal.classList.add('flex');
+    }
+
+    function closeCertModal() {
+      if (!certModal) return;
+      certModal.classList.add('hidden');
+      certModal.classList.remove('flex');
+      if (certModalImg) certModalImg.src = '';
+    }
+
+    if (certModalClose) certModalClose.addEventListener('click', closeCertModal);
+    if (certModal) {
+      certModal.addEventListener('click', (e) => {
+        if (e.target === certModal) closeCertModal();
+      });
+    }
+
+    document.querySelectorAll('.btn-cert-preview, .cert-card').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('a[download]')) return;
+        const img = item.getAttribute('data-cert-img');
+        const pdf = item.getAttribute('data-cert-pdf');
+        const title = item.getAttribute('data-cert-title');
+        if (img) openCertModal(img, pdf, title);
+      });
+    });
+
+  </script>
+</body>
+</html>
